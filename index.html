@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Election 2025 Dashboard</title>
+    <title>Election 2026 Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,6 +12,80 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             -webkit-tap-highlight-color: transparent;
+        }
+        /* Scrollable Table Styles for Candidate Details */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .info-table {
+            display: table;
+            width: 100%;
+            min-width: 600px; /* Minimum width to maintain structure */
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .table-row {
+            display: table-row;
+        }
+        
+        .table-row.header {
+            background: rgba(253, 187, 45, 0.2);
+            font-weight: 600;
+        }
+        
+        .table-cell {
+            display: table-cell;
+            padding: 12px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            vertical-align: top;
+            min-width: 120px; /* Minimum column width */
+        }
+        
+        .table-row:last-child .table-cell {
+            border-bottom: none;
+        }
+        
+        /* Specific column widths for better layout */
+        .table-cell:nth-child(1) { /* Designation/Business Name */
+            min-width: 150px;
+        }
+        
+        .table-cell:nth-child(2) { /* Duration/Industry */
+            min-width: 120px;
+        }
+        
+        .table-cell:nth-child(3) { /* Contributions/Position */
+            min-width: 150px;
+        }
+        
+        .table-cell:nth-child(4) { /* Duration (for business) */
+            min-width: 100px;
+        }
+        
+        /* Scrollbar styling for webkit browsers */
+        .table-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .table-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        
+        .table-container::-webkit-scrollbar-thumb {
+            background: rgba(253, 187, 45, 0.5);
+            border-radius: 3px;
+        }
+        
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(253, 187, 45, 0.7);
         }
         
         html, body {
@@ -1403,13 +1477,14 @@
         }
 
         // Function to open candidate modal
+        // Function to open candidate modal
         function openCandidateModal(candidateId) {
             const candidate = candidateDetails[candidateId];
             if (!candidate) {
                 alert('Candidate details not available yet.');
                 return;
             }
-
+        
             // Set candidate photo
             const photoContainer = document.getElementById('candidatePhoto');
             if (candidate.photo) {
@@ -1417,11 +1492,11 @@
             } else {
                 photoContainer.innerHTML = `<div class="candidate-default-photo"><i class="fas fa-user"></i></div>`;
             }
-
+        
             // Set basic info
             document.getElementById('candidateName').textContent = candidate.name;
             document.getElementById('candidateRole').textContent = candidate.role;
-
+        
             // Set contact info - ONLY PANEL INFORMATION
             const contactContainer = document.getElementById('candidateContact');
             contactContainer.innerHTML = `
@@ -1430,7 +1505,24 @@
                     <span>Panel: ${candidate.panel}</span>
                 </div>
             `;
-
+        
+            // Function to create clickable social media links
+            function createSocialMediaLinks(socialMediaArray) {
+                if (!socialMediaArray || !Array.isArray(socialMediaArray)) return '';
+                
+                let html = '';
+                
+                socialMediaArray.forEach(item => {
+                    const platform = item.platform.toLowerCase();
+                    html += `<div class="social-media-item">
+                        <i class="fab fa-${platform}"></i>
+                        <a href="${item.url}" target="_blank" class="social-link">${item.platform}: ${item.username}</a>
+                    </div>`;
+                });
+                
+                return html;
+            }
+        
             // Set basic details - now includes age, gender, and email
             document.getElementById('basicDetails').innerHTML = `
                 <div class="info-label">Age:</div>
@@ -1443,12 +1535,16 @@
                         <i class="fas fa-envelope"></i> ${candidate.basicDetails.email}
                     </a>
                 </div>
+                <div class="info-label">Area:</div>
+                <div class="info-value">${candidate.basicDetails.area}</div>
+                <div class="info-label">Member ID:</div>
+                <div class="info-value">${candidate.basicDetails.memberId}</div>
                 <div class="info-label">Social Media:</div>
                 <div class="info-value social-media-links">
                     ${createSocialMediaLinks(candidate.basicDetails.socialMedia)}
                 </div>
             `;
-
+        
             // Set current role
             document.getElementById('currentRole').innerHTML = `
                 <div class="info-label">Designation:</div>
@@ -1460,22 +1556,30 @@
                 <div class="info-label">Expertise:</div>
                 <div class="info-value">${candidate.currentRole.expertise}</div>
             `;
-
+        
             // Set about self
             document.getElementById('aboutSelf').innerHTML = `
                 <p style="opacity: 0.9; line-height: 1.6;">${candidate.aboutSelf}</p>
             `;
-
-            // Set bank role
+        
+            // Set bank role in TABULAR format
             document.getElementById('bankRole').innerHTML = `
-                <div class="info-label">Designation:</div>
-                <div class="info-value">${candidate.bankRole.designation}</div>
-                <div class="info-label">Duration:</div>
-                <div class="info-value">${candidate.bankRole.duration}</div>
-                <div class="info-label">Contributions:</div>
-                <div class="info-value">${candidate.bankRole.contributions}</div>
+                <div class="table-container">
+                    <div class="info-table">
+                        <div class="table-row header">
+                            <div class="table-cell">Designation</div>
+                            <div class="table-cell">Duration</div>
+                            <div class="table-cell">Key Contributions</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">${candidate.bankRole.designation}</div>
+                            <div class="table-cell">${candidate.bankRole.duration}</div>
+                            <div class="table-cell">${candidate.bankRole.contributions}</div>
+                        </div>
+                    </div>
+                </div>
             `;
-
+        
             // Set community associations
             document.getElementById('communityAssociations').innerHTML = `
                 <div class="info-label">Organization:</div>
@@ -1488,16 +1592,26 @@
                 <div class="info-value">${candidate.communityAssociations.impact}</div>
             `;
 
+   
+
             // Set business associations
             document.getElementById('businessAssociations').innerHTML = `
-                <div class="info-label">Business Name:</div>
-                <div class="info-value">${candidate.businessAssociations.businessName}</div>
-                <div class="info-label">Industry:</div>
-                <div class="info-value">${candidate.businessAssociations.industry}</div>
-                <div class="info-label">Position:</div>
-                <div class="info-value">${candidate.businessAssociations.position}</div>
-                <div class="info-label">Association:</div>
-                <div class="info-value">${candidate.businessAssociations.duration}</div>
+                <div class="table-container">
+                    <div class="info-table">
+                        <div class="table-row header">
+                            <div class="table-cell">Business Name</div>
+                            <div class="table-cell">Industry</div>
+                            <div class="table-cell">Position</div>
+                            <div class="table-cell">Duration</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">${candidate.businessAssociations.businessName}</div>
+                            <div class="table-cell">${candidate.businessAssociations.industry}</div>
+                            <div class="table-cell">${candidate.businessAssociations.position}</div>
+                            <div class="table-cell">${candidate.businessAssociations.duration}</div>
+                        </div>
+                    </div>
+                </div>
             `;
 
             // Set achievements
@@ -1638,6 +1752,4 @@
         });
     </script>
 </body>
-
 </html>
-

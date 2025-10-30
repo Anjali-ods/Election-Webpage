@@ -688,7 +688,7 @@
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             padding: 10px 0;
             z-index: 1000;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -702,9 +702,11 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.7rem;
-            padding: 5px 20px;
+            padding: 5px 15px;
             border-radius: 10px;
             transition: all 0.3s ease;
+            flex: 1;
+            max-width: 33%;
         }
         
         .nav-item.active {
@@ -714,6 +716,14 @@
         
         .nav-item i {
             font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+        
+        .nav-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            border-radius: 50%;
             margin-bottom: 3px;
         }
         
@@ -807,58 +817,15 @@
     <div class="app-container">
         <!-- Header -->
         <div class="header">
-            <h1>Mahindra Bank Election</h1>
+            <h1>Mahesh Bank Election 2025</h1>
             <p class="subtitle">Your Voice, Your Choice</p>
             <p class="date">Voting begins on December 7, 2025</p>
         </div>
         
         <!-- Page Container -->
         <div class="page-container">
-            <!-- Home Page -->
-            <div id="home-page" class="page active">
-                <!-- Home Page Title Section -->
-                <div class="home-title-section">
-                    <h2 class="home-title">Know Your Candidate</h2>
-                    <p class="home-subtitle">Explore candidate profiles and make an informed decision</p>
-                </div>
-                
-                <div class="panels-container">
-                    <div class="panel" data-target="all-members-page">
-                        <div class="icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>All Members</h3>
-                        <p>View complete list of all registered members eligible for voting.</p>
-                    </div>
-                    
-                    <div class="panel" data-target="founder-panel-page">
-                        <div class="icon-image">
-                            <img src="https://drive.google.com/thumbnail?id=1jRhXtHobAM_f81QErn3Py8Psqcc_9f7W" alt="Founder Panel">
-                        </div>
-                        <h3>Founder Panel</h3>
-                        <p>To transform Mahesh Bank into a world-class financial Institution, offering a broad spectrum of opportunities to its shareholders and achieving a position among the Top 5 Co-operative Banks in India.</p>
-                    </div>
-                    
-                    <div class="panel" data-target="sansthapak-panel-page">
-                        <div class="icon-image">
-                            <img src="https://drive.google.com/thumbnail?id=1KVNZxtCH6CnGaLYrTjuHWs8hnOVBvKAo" alt="Sansthapak Panel">
-                        </div>
-                        <h3>Sansthapak Panel</h3>
-                        <p>कहो दिल से, संस्थापक फिर से!</p>
-                    </div>
-                </div>
-                
-                <div class="footer">
-                    <p>© 2025 Election Committee. All rights reserved.</p>
-                </div>
-            </div>
-            
-            <!-- All Members Page -->
-            <div id="all-members-page" class="page">
-                <button class="back-btn" data-target="home-page">
-                    <i class="fas fa-arrow-left"></i> Back to Home
-                </button>
-                
+            <!-- All Members Page (Now Home Page) -->
+            <div id="all-members-page" class="page active">
                 <div class="section-header">
                     <h2 class="section-title">All Members</h2>
                     <p class="members-count">29 Total Members</p>
@@ -881,8 +848,8 @@
             
             <!-- Founder Panel Page -->
             <div id="founder-panel-page" class="page">
-                <button class="back-btn" data-target="home-page">
-                    <i class="fas fa-arrow-left"></i> Back to Home
+                <button class="back-btn" data-target="all-members-page">
+                    <i class="fas fa-arrow-left"></i> Back to All Members
                 </button>
                 
                 <div class="section-header">
@@ -906,8 +873,8 @@
             
             <!-- Sansthapak Panel Page -->
             <div id="sansthapak-panel-page" class="page">
-                <button class="back-btn" data-target="home-page">
-                    <i class="fas fa-arrow-left"></i> Back to Home
+                <button class="back-btn" data-target="all-members-page">
+                    <i class="fas fa-arrow-left"></i> Back to All Members
                 </button>
                 
                 <div class="section-header">
@@ -1050,11 +1017,19 @@
             <div class="loading-spinner"></div>
         </div>
 
-        <!-- Mobile Navigation - Only Home Button -->
+        <!-- Mobile Navigation - Now with All Members, Founder Panel, and Sansthapak Panel -->
         <div class="mobile-nav">
-            <a href="#" class="nav-item active" data-target="home-page">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+            <a href="#" class="nav-item active" data-target="all-members-page">
+                <i class="fas fa-users"></i>
+                <span>All Members</span>
+            </a>
+            <a href="#" class="nav-item" data-target="founder-panel-page">
+                <img src="https://drive.google.com/thumbnail?id=1jRhXtHobAM_f81QErn3Py8Psqcc_9f7W" alt="Founder Panel" class="nav-logo">
+                <span>Founder Panel</span>
+            </a>
+            <a href="#" class="nav-item" data-target="sansthapak-panel-page">
+                <img src="https://drive.google.com/thumbnail?id=1KVNZxtCH6CnGaLYrTjuHWs8hnOVBvKAo" alt="Sansthapak Panel" class="nav-logo">
+                <span>Sansthapak Panel</span>
             </a>
         </div>
     </div>
@@ -1229,10 +1204,10 @@
             },
             { 
                 id: "SP-010", 
-                name: "PAWAN KUMAR LOHIYA", 
+                name: "PAWAN KUMAR LOYA", 
                 role: "Sansthapak Member", 
                 panel: "sansthapak", 
-                photo: null 
+                photo: "https://drive.google.com/thumbnail?id=1mpewL7jZ77vc9nUPcWlpuTkc4JLRh75I" 
             },
             { 
                 id: "SP-011", 
@@ -1273,6 +1248,146 @@
 
         // Candidate detailed information with direct URLs
         const candidateDetails = {
+            // Add to the candidateDetails object in your JavaScript
+            "SP-010": {
+                name: "PAWAN KUMAR LOHIYA",
+                role: "Sansthapak Member",
+                panel: "Sansthapak Panel",
+                photo: null,
+                basicDetails: {
+                    age: "45",
+                    gender: "Male",
+                    email: "pawan.lohiya@email.com",
+                    area: "West Branch Area",
+                    socialMedia: [
+                        {
+                            platform: "Facebook",
+                            username: "Pawan Lohiya",
+                            url: "https://facebook.com/pawan.lohiya"
+                        },
+                        {
+                            platform: "Twitter",
+                            username: "@pawan_lohiya",
+                            url: "https://twitter.com/pawan_lohiya"
+                        }
+                    ],
+                    memberId: "MEM-2026-024"
+                },
+                currentRole: {
+                    designation: "Business Owner",
+                    organization: "Lohiya Traders",
+                    experience: "18 Years",
+                    expertise: "Retail Business Management, Supply Chain, Customer Relations"
+                },
+                aboutSelf: "I am a dedicated businessman with 18 years of experience in retail and trading. My journey in the cooperative sector began 8 years ago when I realized the importance of community banking. I believe in ethical business practices and have always prioritized customer satisfaction. My experience in managing a successful business has given me insights into financial planning and risk management that I want to bring to our cooperative bank.",
+                bankRole: {
+                    designation: "Member & Business Development Committee",
+                    duration: "2019-Present (4 Years)",
+                    contributions: "- Helped increase business member accounts by 25%<br>- Organized business networking events<br>- Provided insights on SME banking needs<br>- Assisted in developing business loan products"
+                },
+                communityAssociations: {
+                    organization: "Local Traders Association",
+                    role: "Vice President",
+                    duration: "2017-Present",
+                    impact: "- Organized trade fairs benefiting 200+ local businesses<br>- Established mentorship program for young entrepreneurs<br>- Negotiated better terms with suppliers for members"
+                },
+                businessAssociations: {
+                    businessName: "Lohiya General Stores",
+                    industry: "Retail & Trading",
+                    position: "Proprietor",
+                    duration: "18 Years"
+                },
+                achievements: "🏆 Best Local Business Award 2020 - Chamber of Commerce<br>🏆 Community Business Leader 2019 - Traders Association<br>🏆 Excellence in Customer Service 2018 - Retailers Forum<br>🏆 Young Entrepreneur Award 2015 - Business Development Council",
+                vision: [
+                    {
+                        focus: "1. Business Member Focus",
+                        plan: "Develop specialized products for business members, streamline business loan processes, and create networking platforms for member businesses."
+                    },
+                    {
+                        focus: "2. Digital Transformation for Businesses",
+                        plan: "Implement business-friendly digital banking solutions, online loan applications, and digital payment integrations for member businesses."
+                    },
+                    {
+                        focus: "3. Financial Inclusion for SMEs",
+                        plan: "Create tailored financial products for small and medium enterprises, provide business advisory services, and facilitate access to credit."
+                    },
+                    {
+                        focus: "4. Strengthening Cooperative Values",
+                        plan: "Promote cooperative principles among business members, encourage profit-sharing models, and build a supportive business community."
+                    }
+                ],
+                appealMessage: "Dear fellow members, as a businessman who understands the challenges of running enterprises, I bring practical experience to the table. I've experienced firsthand how proper financial support can transform businesses. If elected, I will work to ensure our bank becomes the preferred financial partner for all business members. I promise to bring transparency, efficiency, and business acumen to serve you better. Your trust will be my greatest responsibility."
+            },
+            
+            "FP-005": {
+                name: "BIYANI SHYAM SUDER",
+                role: "Founder Member",
+                panel: "Founder Panel",
+                photo: "https://drive.google.com/thumbnail?id=10kT1-_9ZvbIhohiJ54A3JB9MdEKb0g82",
+                basicDetails: {
+                    age: "55",
+                    gender: "Male",
+                    email: "shyam.suder@email.com",
+                    area: "Central Business District",
+                    socialMedia: [
+                        {
+                            platform: "LinkedIn",
+                            username: "Shyam Suder Biyani",
+                            url: "https://linkedin.com/in/shyam-suder-biyani"
+                        },
+                        {
+                            platform: "Facebook",
+                            username: "Shyam Biyani",
+                            url: "https://facebook.com/shyam.biyani"
+                        }
+                    ],
+                    memberId: "MEM-2026-005"
+                },
+                currentRole: {
+                    designation: "Senior Financial Advisor",
+                    organization: "Biyani Wealth Management",
+                    experience: "28 Years",
+                    expertise: "Wealth Management, Investment Strategies, Risk Assessment"
+                },
+                aboutSelf: "With nearly three decades in financial services, I have dedicated my career to helping individuals and businesses achieve their financial goals. I hold multiple certifications in financial planning and have been actively involved in our cooperative bank since its inception. My approach combines traditional financial wisdom with modern investment strategies. I believe that a cooperative bank should not just safeguard money but should actively help members grow their wealth through sound financial guidance.",
+                bankRole: {
+                    designation: "Investment Committee Chair",
+                    duration: "2015-2023 (8 Years)",
+                    contributions: "- Improved investment portfolio returns by 18%<br>- Introduced systematic investment plans for members<br>- Reduced non-performing assets by 22%<br>- Established investment advisory services"
+                },
+                communityAssociations: {
+                    organization: "Financial Literacy Foundation",
+                    role: "Founder & Chairman",
+                    duration: "2010-Present",
+                    impact: "- Conducted financial literacy workshops for 10,000+ people<br>- Published financial education materials in local languages<br>- Established scholarship program for finance students<br>- Mentored 500+ young finance professionals"
+                },
+                businessAssociations: {
+                    businessName: "Biyani Financial Services",
+                    industry: "Financial Advisory & Wealth Management",
+                    position: "Managing Director",
+                    duration: "20 Years"
+                },
+                achievements: "🏆 Lifetime Achievement Award 2022 - Financial Planners Association<br>🏆 Best Wealth Manager 2020 - Financial Times Ranking<br>🏆 Community Service Excellence 2019 - Rotary Club<br>🏆 Innovation in Financial Products 2018 - Banking Association",
+                vision: [
+                    {
+                        focus: "1. Wealth Creation for Members",
+                        plan: "Introduce diversified investment products, systematic wealth creation plans, and personalized financial advisory services for all members."
+                    },
+                    {
+                        focus: "2. Financial Education & Literacy",
+                        plan: "Establish comprehensive financial education programs, investment workshops, and one-on-one financial counseling for members."
+                    },
+                    {
+                        focus: "3. Sustainable Investment Strategy",
+                        plan: "Develop ESG-focused investment options, green financing initiatives, and sustainable banking practices."
+                    },
+                    {
+                        focus: "4. Technology-Enabled Financial Services",
+                        plan: "Implement AI-powered investment advisory, digital wealth management tools, and seamless online investment platforms."
+                    }
+                ],
+                appealMessage: "My dear fellow members, having served our cooperative for many years, I understand what it takes to build a financially strong institution. My vision is to transform our bank into not just a safe place for your money, but a partner in your wealth creation journey. I bring 28 years of financial expertise and a proven track record of delivering results. Together, we can build a bank that not only preserves your wealth but actively helps it grow. Your financial well-being will always be my top priority."
+            },
             "FP-001": {
                 name: "KAILASH NARAYAN BHANGADIYA",
                 role: "CHAIRMAN CANDIDATE",
@@ -1454,6 +1569,17 @@
             return html;
         }
 
+        // Function to sort members alphabetically by name
+        function sortMembersAlphabetically(members) {
+            return members.sort((a, b) => {
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+        }
+
         // Function to render members in a grid
         function renderMembers(members, containerId) {
             const grid = document.getElementById(containerId);
@@ -1464,7 +1590,10 @@
                 return;
             }
             
-            members.forEach(member => {
+            // Sort members alphabetically
+            const sortedMembers = sortMembersAlphabetically(members);
+            
+            sortedMembers.forEach(member => {
                 const card = document.createElement('div');
                 card.className = 'member-card';
                 
@@ -1494,7 +1623,6 @@
             });
         }
 
-        // Function to open candidate modal
         // Function to open candidate modal
         function openCandidateModal(candidateId) {
             const candidate = candidateDetails[candidateId];
@@ -1553,10 +1681,6 @@
                         <i class="fas fa-envelope"></i> ${candidate.basicDetails.email}
                     </a>
                 </div>
-                <div class="info-label">Area:</div>
-                <div class="info-value">${candidate.basicDetails.area}</div>
-                <div class="info-label">Member ID:</div>
-                <div class="info-value">${candidate.basicDetails.memberId}</div>
                 <div class="info-label">Social Media:</div>
                 <div class="info-value social-media-links">
                     ${createSocialMediaLinks(candidate.basicDetails.socialMedia)}
@@ -1600,7 +1724,6 @@
                 </div>
             `;
         
-            // Set community associations
             // Set community associations in SCROLLABLE TABULAR format
             document.getElementById('communityAssociations').innerHTML = `
                 <div class="table-container">
@@ -1620,8 +1743,6 @@
                     </div>
                 </div>
             `;
-
-   
 
             // Set business associations
             document.getElementById('businessAssociations').innerHTML = `
@@ -1685,13 +1806,11 @@
             setTimeout(() => {
                 document.getElementById(pageId).classList.add('active');
                 
-                // Update mobile navigation - only update if it's the home page
-                if (pageId === 'home-page') {
-                    document.querySelectorAll('.nav-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    document.querySelector(`.nav-item[data-target="${pageId}"]`).classList.add('active');
-                }
+                // Update mobile navigation
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector(`.nav-item[data-target="${pageId}"]`).classList.add('active');
                 
                 // Hide loading indicator
                 document.getElementById('loading').style.display = 'none';
@@ -1712,14 +1831,6 @@
             renderMembers(founderMembers, 'founder-members-grid');
             renderMembers(sansthapakMembers, 'sansthapak-members-grid');
             
-            // Panel navigation
-            document.querySelectorAll('.panel').forEach(panel => {
-                panel.addEventListener('click', function() {
-                    const targetPage = this.getAttribute('data-target');
-                    navigateToPage(targetPage);
-                });
-            });
-            
             // Back button functionality
             document.querySelectorAll('.back-btn').forEach(button => {
                 button.addEventListener('click', function() {
@@ -1728,7 +1839,7 @@
                 });
             });
             
-            // Mobile navigation - Only Home button
+            // Mobile navigation
             document.querySelectorAll('.nav-item').forEach(navItem => {
                 navItem.addEventListener('click', function(e) {
                     e.preventDefault();

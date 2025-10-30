@@ -1601,15 +1601,24 @@
             `;
         
             // Set community associations
+            // Set community associations in SCROLLABLE TABULAR format
             document.getElementById('communityAssociations').innerHTML = `
-                <div class="info-label">Organization:</div>
-                <div class="info-value">${candidate.communityAssociations.organization}</div>
-                <div class="info-label">Role:</div>
-                <div class="info-value">${candidate.communityAssociations.role}</div>
-                <div class="info-label">Duration:</div>
-                <div class="info-value">${candidate.communityAssociations.duration}</div>
-                <div class="info-label">Impact:</div>
-                <div class="info-value">${candidate.communityAssociations.impact}</div>
+                <div class="table-container">
+                    <div class="info-table">
+                        <div class="table-row header">
+                            <div class="table-cell">Organization</div>
+                            <div class="table-cell">Role</div>
+                            <div class="table-cell">Duration</div>
+                            <div class="table-cell">Key Impact</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">${candidate.communityAssociations.organization}</div>
+                            <div class="table-cell">${candidate.communityAssociations.role}</div>
+                            <div class="table-cell">${candidate.communityAssociations.duration}</div>
+                            <div class="table-cell">${candidate.communityAssociations.impact}</div>
+                        </div>
+                    </div>
+                </div>
             `;
 
    

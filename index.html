@@ -330,7 +330,25 @@
             gap: 12px;
             margin-bottom: 25px;
         }
+        /* Justified Text Styles for Candidate Modal */
+        .justified-text {
+            text-align: justify;
+            line-height: 1.6;
+            opacity: 0.9;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+        }
         
+        .justified-text p {
+            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .justified-text p:last-child {
+            margin-bottom: 0;
+        }
         .member-card {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 12px;
@@ -1537,6 +1555,8 @@
                 </div>
                 <div class="info-label">Area:</div>
                 <div class="info-value">${candidate.basicDetails.area}</div>
+                <div class="info-label">Member ID:</div>
+                <div class="info-value">${candidate.basicDetails.memberId}</div>
                 <div class="info-label">Social Media:</div>
                 <div class="info-value social-media-links">
                     ${createSocialMediaLinks(candidate.basicDetails.socialMedia)}
@@ -1557,7 +1577,9 @@
         
             // Set about self
             document.getElementById('aboutSelf').innerHTML = `
-                <p style="opacity: 0.9; line-height: 1.6;">${candidate.aboutSelf}</p>
+                <div class="justified-text">
+                    <p>${candidate.aboutSelf}</p>
+                </div>
             `;
         
             // Set bank role in TABULAR format
@@ -1626,7 +1648,9 @@
 
             // Set appeal message
             document.getElementById('appealMessage').innerHTML = `
-                <div class="appeal-message">${candidate.appealMessage}</div>
+                <div class="appeal-message justified-text">
+                    <p>${candidate.appealMessage}</p>
+                </div>
             `;
 
             // Show modal
@@ -1751,4 +1775,3 @@
     </script>
 </body>
 </html>
-
